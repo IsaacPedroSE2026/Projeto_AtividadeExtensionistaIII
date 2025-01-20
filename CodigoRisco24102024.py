@@ -9,48 +9,48 @@
 #                                                                                        #
 ##########################################################################################
 
-# import pandas as pd
-# import folium
-# from folium.plugins import MarkerCluster
+import pandas as pd
+import folium
+from folium.plugins import MarkerCluster
 
-# # Carregar o arquivo Excel
-# df = pd.read_excel('IndicadoresAguasPluviais_noite24102024.xlsx')
+# Carregar o arquivo Excel
+df = pd.read_excel('IndicadoresAguasPluviais_noite24102024.xlsx')
 
-# # Definir as coordenadas da região metropolitana do Recife para centralizar o mapa
-# recife_coords = [-8.0475, -34.8770]
+# Definir as coordenadas da região metropolitana do Recife para centralizar o mapa
+recife_coords = [-8.0475, -34.8770]
 
-# # Criar o mapa centralizado na região metropolitana do Recife
-# mapa = folium.Map(location=recife_coords, zoom_start=11)
+# Criar o mapa centralizado na região metropolitana do Recife
+mapa = folium.Map(location=recife_coords, zoom_start=11)
 
-# # Criar uma camada para cada ano e adicionar ao controle de camadas
-# anos = range(2017, 2023)
-# for ano in anos:
-#     # Filtrar os dados para o ano específico
-#     data_ano = df[df['Ano'] == ano]
+# Criar uma camada para cada ano e adicionar ao controle de camadas
+anos = range(2017, 2023)
+for ano in anos:
+    # Filtrar os dados para o ano específico
+    data_ano = df[df['Ano'] == ano]
     
-#     # Criar uma camada de grupo para o ano
-#     camada_ano = folium.FeatureGroup(name=f"Ano {ano}")
-#     marker_cluster = MarkerCluster().add_to(camada_ano)
+    # Criar uma camada de grupo para o ano
+    camada_ano = folium.FeatureGroup(name=f"Ano {ano}")
+    marker_cluster = MarkerCluster().add_to(camada_ano)
     
-#     # Adicionar marcadores ao cluster
-#     for idx, row in data_ano.iterrows():
-#         folium.Marker(
-#             location=[row['Latitude'], row['Longitude']],
-#             popup=(
-#                 f"<b>Ano:</b> {row['Ano']}<br>"
-#                 f"<b>Risco de Inundação:</b> {row['Risco de Inundação']}"
-#             ),
-#         ).add_to(marker_cluster)
+    # Adicionar marcadores ao cluster
+    for idx, row in data_ano.iterrows():
+        folium.Marker(
+            location=[row['Latitude'], row['Longitude']],
+            popup=(
+                f"<b>Ano:</b> {row['Ano']}<br>"
+                f"<b>Risco de Inundação:</b> {row['Risco de Inundação']}"
+            ),
+        ).add_to(marker_cluster)
     
-#     # Adicionar a camada do ano ao mapa
-#     camada_ano.add_to(mapa)
+    # Adicionar a camada do ano ao mapa
+    camada_ano.add_to(mapa)
 
-# # Adicionar o controle de camadas ao mapa
-# folium.LayerControl(collapsed=False).add_to(mapa)
+# Adicionar o controle de camadas ao mapa
+folium.LayerControl(collapsed=False).add_to(mapa)
 
-# # Salvar o mapa em um arquivo HTML
-# mapa.save('mapa_interativo_todos_os_anos.html')
-# print("Mapa interativo com todos os anos salvo em 'mapa_interativo_todos_os_anos.html'")
+# Salvar o mapa em um arquivo HTML
+mapa.save('mapa_interativo_todos_os_anos.html')
+print("Mapa interativo com todos os anos salvo em 'mapa_interativo_todos_os_anos.html'")
 
 
 
@@ -110,49 +110,49 @@
 ##########################################################################################
 
 
-import pandas as pd
-import folium
-from folium.plugins import MarkerCluster
+# import pandas as pd
+# import folium
+# from folium.plugins import MarkerCluster
 
-# Carregar o arquivo Excel
-df = pd.read_excel('IndicadoresAguasPluviais_noite24102024.xlsx')
+# # Carregar o arquivo Excel
+# df = pd.read_excel('IndicadoresAguasPluviais_noite24102024.xlsx')
 
-# Função para criar o mapa interativo para um ano específico
-def criar_mapa_por_ano(data, ano, save_path):
-    # Filtrar os dados para o ano específico
-    data_ano = data[data['Ano'] == ano]
+# # Função para criar o mapa interativo para um ano específico
+# def criar_mapa_por_ano(data, ano, save_path):
+#     # Filtrar os dados para o ano específico
+#     data_ano = data[data['Ano'] == ano]
     
-    # Definir as coordenadas de centralização na região metropolitana do Recife
-    recife_coords = [-8.0475, -34.8770]
+#     # Definir as coordenadas de centralização na região metropolitana do Recife
+#     recife_coords = [-8.0475, -34.8770]
     
-    # Criar o mapa centralizado na região metropolitana do Recife
-    mapa = folium.Map(
-        location=recife_coords,
-        zoom_start=11  # Zoom ajustado para visualizar a região metropolitana
-    )
+#     # Criar o mapa centralizado na região metropolitana do Recife
+#     mapa = folium.Map(
+#         location=recife_coords,
+#         zoom_start=11  # Zoom ajustado para visualizar a região metropolitana
+#     )
     
-    # Cluster de marcadores para agrupar os pontos
-    marker_cluster = MarkerCluster().add_to(mapa)
+#     # Cluster de marcadores para agrupar os pontos
+#     marker_cluster = MarkerCluster().add_to(mapa)
     
-    # Adicionar cada ponto ao mapa com o popup de informações
-    for idx, row in data_ano.iterrows():
-        folium.Marker(
-            location=[row['Latitude'], row['Longitude']],
-            popup=(
-                f"<b>Ano:</b> {row['Ano']}<br>"
-                f"<b>Risco de Inundação:</b> {row['Risco de Inundação']}"
-            ),
-        ).add_to(marker_cluster)
+#     # Adicionar cada ponto ao mapa com o popup de informações
+#     for idx, row in data_ano.iterrows():
+#         folium.Marker(
+#             location=[row['Latitude'], row['Longitude']],
+#             popup=(
+#                 f"<b>Ano:</b> {row['Ano']}<br>"
+#                 f"<b>Risco de Inundação:</b> {row['Risco de Inundação']}"
+#             ),
+#         ).add_to(marker_cluster)
     
-    # Salvar o mapa em um arquivo HTML
-    mapa.save(save_path)
+#     # Salvar o mapa em um arquivo HTML
+#     mapa.save(save_path)
 
-# Criar e salvar mapas para os anos de 2017 a 2022
-anos = range(2017, 2023)
-for ano in anos:
-    save_path = f'mapa_interativo_{ano}.html'
-    criar_mapa_por_ano(df, ano, save_path)
-    print(f"Mapa para o ano {ano} salvo em {save_path}")
+# # Criar e salvar mapas para os anos de 2017 a 2022
+# anos = range(2017, 2023)
+# for ano in anos:
+#     save_path = f'mapa_interativo_{ano}.html'
+#     criar_mapa_por_ano(df, ano, save_path)
+#     print(f"Mapa para o ano {ano} salvo em {save_path}")
 
 
 
